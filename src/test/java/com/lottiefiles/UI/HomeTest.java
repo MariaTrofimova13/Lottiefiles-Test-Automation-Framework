@@ -11,24 +11,26 @@ public class HomeTest {
     private HomePage homePage;
 
     @BeforeEach
-    public void openHomePageAndCloseCookies(){
+    public void openHomePageAndCloseCookies() {
         homePage = new HomePage();
         homePage.open();
         homePage.closeCookies();
     }
 
     @Test
-    public void testLoginHasTitle() {
-        homePage.clickLoginButton();
-        Assertions.assertEquals(homePage.LOGIN_TITLE_TEXT, homePage.getLoginTitle());
-    }
-
-    @Test
     public void testOpenLoginWithEmail() {
         homePage.clickLoginButton();
         homePage.clickLoginButtonWithEmail();
+        Assertions.assertEquals(homePage.LOGIN_TITLE_TEXT, homePage.getLoginTitle());
 
     }
+
+    @Test
+    public void testVerifyErrorOnRandomInvalidEmailAndPassword() {
+        homePage.fillLoginFormWithRandomEmailAndPassword();
+        Assertions.assertEquals(homePage.INVALID_LOGIN_ERROR_TEXT, homePage.getLoginErrorMessage());
+    }
+
 
     @AfterEach
     public void closeBrowser() {
