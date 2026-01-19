@@ -17,6 +17,10 @@ public class HomePage {
 
     public final String LOGIN_TITLE_TEXT = "Log in";
     public final String INVALID_LOGIN_ERROR_TEXT = "Incorrect email or password. Please enter them again.";
+    public final String MESSAGE_AFTER_SUCCESSFUL_LOGIN_TEXT = "Join your team's workspace or create a new one";
+    private final String REAL_EMAIL = "maria.tarasowa@tut.by";
+    private final String REAL_PASSWORD = "Test132435test";
+
 
     private final By COOKIE_ALERT_CLOSE = By.xpath("//button[@class='simple-cookie-banner__accept-btn']");
     private final By BUTTON_LOGIN = By.xpath("//button[@class=\"cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-9 px-4 py-2 has-[>svg]:px-3 font-sans\"]");
@@ -28,6 +32,7 @@ public class HomePage {
     private final By PASSWORD_INPUT = By.xpath("//div[@class=\"flex flex-col gap-4\"]//input[@placeholder=\"Password\"]");
     private final By VISIBLE_BUTTON_LOGIN = By.xpath("//button[@id=\"button-login-submit\"]");
     private final By INVALID_LOGIN_ERROR = By.xpath("//p[@class=\"text-sm\"]");
+    private final By MESSAGE_AFTER_SUCCESSFUL_LOGIN = By.xpath("//h1[@class=\"w-full text-lg font-bold leading-8 text-gray-900 mb-1 text-center\"]");
 
     private WebDriver driver;
     private WebDriverWait wait;
@@ -113,6 +118,21 @@ public class HomePage {
 
     public String createRandomPassword(){
         return faker.internet().password(8, 16);
+    }
+
+    public void fillLoginFormWithRealEmailAndPassword() {
+        clickLoginButton();
+        clickLoginButtonWithEmail();
+        clickEmailField();
+        sendRandomEmail(REAL_EMAIL);
+        clickPasswordField();
+        sendRandomPassword(REAL_PASSWORD);
+        clickVisibleButtonLogin();
+    }
+
+    public String getMessageAfterLogin() {
+        waitForVisibleOfElement(MESSAGE_AFTER_SUCCESSFUL_LOGIN);
+        return driver.findElement(MESSAGE_AFTER_SUCCESSFUL_LOGIN).getText();
     }
 
     public void fillLoginFormWithRandomEmailAndPassword() {

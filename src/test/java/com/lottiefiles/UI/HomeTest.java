@@ -26,6 +26,12 @@ public class HomeTest {
     }
 
     @Test
+    public void PositiveTestLogin() {
+        homePage.fillLoginFormWithRealEmailAndPassword();
+        Assertions.assertEquals(homePage.MESSAGE_AFTER_SUCCESSFUL_LOGIN_TEXT, homePage.getMessageAfterLogin());
+    }
+
+    @Test
     public void testVerifyErrorOnRandomInvalidEmailAndPassword() {
         homePage.fillLoginFormWithRandomEmailAndPassword();
         Assertions.assertEquals(homePage.INVALID_LOGIN_ERROR_TEXT, homePage.getLoginErrorMessage());
