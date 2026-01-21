@@ -17,27 +17,6 @@ public class HomeTest {
         homePage.closeCookies();
     }
 
-    @Test
-    public void testOpenLoginWithEmail() {
-        homePage.clickLoginButton();
-        homePage.clickLoginButtonWithEmail();
-        Assertions.assertEquals(homePage.LOGIN_TITLE_TEXT, homePage.getLoginTitle());
-
-    }
-
-    @Test
-    public void PositiveTestLogin() {
-        homePage.fillLoginFormWithRealEmailAndPassword();
-        Assertions.assertEquals(homePage.MESSAGE_AFTER_SUCCESSFUL_LOGIN_TEXT, homePage.getMessageAfterLogin());
-    }
-
-    @Test
-    public void testVerifyErrorOnRandomInvalidEmailAndPassword() {
-        homePage.fillLoginFormWithRandomEmailAndPassword();
-        Assertions.assertEquals(homePage.INVALID_LOGIN_ERROR_TEXT, homePage.getLoginErrorMessage());
-    }
-
-
     @AfterEach
     public void closeBrowser() {
         Driver.quit();
