@@ -17,6 +17,11 @@ public class HomeTest {
         homePage.closeCookies();
     }
 
+    @Test
+    public void testTextInFooter() {
+        Assertions.assertEquals(homePage.FOOTER_TEXT, homePage.getFooterText());
+    }
+
     @AfterEach
     public void closeBrowser() {
         Driver.quit();
