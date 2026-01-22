@@ -19,20 +19,23 @@ public class HomePage {
         this.driver = Driver.getDriver();
     }
 
-    public void open() {
+    public HomePage open() {
         driver.get(BASE_URL);
+        return this;
     }
 
-    public void closeCookies() {
+    public HomePage closeCookies() {
         Driver.click(BUTON_COOKIE_CLOSE);
+        return this;
     }
 
     public String getFooterText() {
         return Driver.getText(FOOTER);
     }
 
-    public void clickLoginButton() {
+    public LoginPage clickLoginButton() {
         Driver.click(BUTTON_LOGIN);
+        return new LoginPage();
     }
 
 

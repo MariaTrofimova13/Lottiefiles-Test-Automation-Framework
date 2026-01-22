@@ -12,9 +12,9 @@ public class HomeTest {
 
     @BeforeEach
     public void openHomePageAndCloseCookies() {
-        homePage = new HomePage();
-        homePage.open();
-        homePage.closeCookies();
+        homePage = new HomePage()
+                .open()
+                .closeCookies();
     }
 
     @Test
