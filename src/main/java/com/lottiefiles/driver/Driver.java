@@ -1,5 +1,6 @@
 package com.lottiefiles.driver;
 
+import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,6 +13,7 @@ import java.time.Duration;
 public class Driver {
     private static WebDriver driver;
     private static WebDriverWait wait;
+    private static Faker faker;
 
     private Driver() {
 
@@ -23,6 +25,7 @@ public class Driver {
             driver.manage().window().maximize();
         }
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        faker = new Faker();
         return driver;
     }
 
@@ -39,12 +42,16 @@ public class Driver {
 
     private static WebElement waitAndSwitchToFrameAndWaitForVisibilityOfElement(String IdForIframe, String xpathForElement) {
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(IdForIframe));
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathForElement)));
+         return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathForElement)));
     }
 
     public void waitAndSwitchToFrame(String xpath) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(xpath));
+    }
+
+    public static void switchToDefaultContent() {
+        driver.switchTo().defaultContent();
     }
 
     public static void click(String xpath) {
@@ -55,6 +62,10 @@ public class Driver {
         waitForVisibilityOfElement(xpath).click();
     }
 
+    public static void switchToFrameAndWaitAndClick(String IdForIframe, String xpathForElement) {
+        waitAndSwitchToFrameAndWaitForVisibilityOfElement(IdForIframe, xpathForElement).click();
+    }
+
     public static void input(String xpath, String text) {
         driver.findElement(By.xpath(xpath)).sendKeys(text);
     }
@@ -63,11 +74,32 @@ public class Driver {
         waitForVisibilityOfElement(xpath).sendKeys(text);
     }
 
+    public static void switchToFrameAndWaitAndInput(String IdForIframe, String xpathForElement, String text) {
+       WebElement element = waitAndSwitchToFrameAndWaitForVisibilityOfElement(IdForIframe, xpathForElement);
+       element.clear();
+       element.sendKeys(text);
+
+    }
+
     public static String getText(String xpath) {
         return driver.findElement(By.xpath(xpath)).getText();
     }
 
     public static String waitAndGetText(String xpath) {
         return waitForVisibilityOfElement(xpath).getText();
+    }
+
+    public static String switchToFrameAndWaitAndGetText(String IdForIframe, String xpathForElement) {
+        String text = waitAndSwitchToFrameAndWaitForVisibilityOfElement(IdForIframe, xpathForElement).getText();
+        switchToDefaultContent();
+        return text;
+    }
+
+    public static String createRandomEmail() {
+        return faker.internet().emailAddress();
+    }
+
+    public static String createRandomPassword() {
+        return faker.internet().password(8, 16);
     }
 }
