@@ -45,11 +45,6 @@ public class Driver {
          return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathForElement)));
     }
 
-    public void waitAndSwitchToFrame(String xpath) {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(xpath));
-    }
-
     public static void switchToDefaultContent() {
         driver.switchTo().defaultContent();
     }
