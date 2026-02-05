@@ -25,7 +25,6 @@ public class Driver {
             driver.manage().window().maximize();
         }
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        faker = new Faker();
         return driver;
     }
 
@@ -91,10 +90,12 @@ public class Driver {
     }
 
     public static String createRandomEmail() {
+        faker = new Faker();
         return faker.internet().emailAddress();
     }
 
     public static String createRandomPassword() {
+        faker = new Faker();
         return faker.internet().password(8, 16);
     }
 }

@@ -4,8 +4,8 @@
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>by.it_academy</groupId>
-    <artifactId>lottiefiles</artifactId>
+    <groupId>com.lottiefiles</groupId>
+    <artifactId>lottiefiles_TAF</artifactId>
     <version>1.0.0</version>
 
     <properties>
