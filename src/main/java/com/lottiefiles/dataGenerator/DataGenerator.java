@@ -16,4 +16,8 @@ public class DataGenerator {
     public static String createRandomPassword() {
         return faker.internet().password(8, 16);
     }
+
+    public static String generateRandomWord() {
+        return faker.lorem().word();
+    }
 }

@@ -1,9 +1,6 @@
 package com.lottiefiles.driver;
 
-import com.github.javafaker.Faker;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -52,6 +49,11 @@ public class Driver {
         driver.findElement(By.xpath(xpath)).click();
     }
 
+    public static void PressEnter(String xpath) {
+        driver.findElement(By.xpath(xpath)).sendKeys(Keys.ENTER);
+
+    }
+
     public static void waitAndClick(String xpath) {
         waitForVisibilityOfElement(xpath).click();
     }
@@ -87,5 +89,9 @@ public class Driver {
         String text = waitAndSwitchToFrameAndWaitForVisibilityOfElement(IdForIframe, xpathForElement).getText();
         switchToDefaultContent();
         return text;
+    }
+
+    public static void goToPage (String url){
+        driver.get(url);
     }
 }

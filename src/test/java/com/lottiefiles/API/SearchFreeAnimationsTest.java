@@ -11,7 +11,7 @@ public class SearchFreeAnimationsTest {
     String searchQuery = "cat";
 
     @Test
-    public void testSearchPictureLoading() {
+    public void testSearchPicture() {
         searchService = new SearchService();
         searchService.setSearchQuery(searchQuery);
         searchService.doRequest();
