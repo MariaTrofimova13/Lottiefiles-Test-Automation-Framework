@@ -7,16 +7,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class SearchFreeAnimationsTest {
+    private SearchService searchService;
+    String searchQuery = "cat";
+
     @Test
     public void testSearchPictureLoading() {
-        String searchQuery = "cat";
-        SearchService searchService = new SearchService();
+        searchService = new SearchService();
         searchService.setSearchQuery(searchQuery);
         searchService.doRequest();
 
         assertAll("searchService",
                 () -> assertEquals(200, searchService.getStatusCode()),
-                () -> assertTrue(searchService.getBody().contains("Free" + " " + searchService.capitalFirstLetter(searchQuery) + " " +  "Animations"), "Текст не соответствует фразе Free Loading Animations")
+                () -> assertTrue(searchService.getBody().contains(searchService.getExpectedText(searchQuery)), "Текст не соответствует фразе Free поисковое слово Animations")
         );
     }
 }

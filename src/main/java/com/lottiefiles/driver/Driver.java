@@ -13,7 +13,7 @@ import java.time.Duration;
 public class Driver {
     private static WebDriver driver;
     private static WebDriverWait wait;
-    private static Faker faker;
+
 
     private Driver() {
 
@@ -87,15 +87,5 @@ public class Driver {
         String text = waitAndSwitchToFrameAndWaitForVisibilityOfElement(IdForIframe, xpathForElement).getText();
         switchToDefaultContent();
         return text;
-    }
-
-    public static String createRandomEmail() {
-        faker = new Faker();
-        return faker.internet().emailAddress();
-    }
-
-    public static String createRandomPassword() {
-        faker = new Faker();
-        return faker.internet().password(8, 16);
     }
 }

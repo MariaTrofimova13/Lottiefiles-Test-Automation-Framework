@@ -1,5 +1,6 @@
 package com.lottiefiles.UI;
 
+import com.lottiefiles.dataGenerator.*;
 import com.lottiefiles.driver.Driver;
 import com.lottiefiles.pages.HomePage;
 import com.lottiefiles.pages.LoginPage;
@@ -8,8 +9,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.lottiefiles.driver.Driver.createRandomEmail;
-import static com.lottiefiles.driver.Driver.createRandomPassword;
 
 public class LoginTest {
     private LoginPage loginPage;
@@ -42,9 +41,9 @@ public class LoginTest {
     @Test
     public void testVerifyErrorOnRandomInvalidEmailAndPassword() {
         loginPage.clickEmailField()
-                .inputRandomEmail(createRandomEmail())
+                .inputRandomEmail(DataGenerator.createRandomEmail())
                 .clickPasswordField()
-                .inputRandomPassword(createRandomPassword())
+                .inputRandomPassword(DataGenerator.createRandomPassword())
                 .clickVisibleButtonLogin();
         Assertions.assertEquals(loginPage.INVALID_LOGIN_ERROR_TEXT, loginPage.getLoginErrorMessage());
     }
@@ -52,14 +51,14 @@ public class LoginTest {
     @Test
     public void testIsLoginButtonDisabledAfterEmailInput() {
         loginPage.clickEmailField()
-                .inputRandomEmail(createRandomEmail());
+                .inputRandomEmail(DataGenerator.createRandomEmail());
         Assertions.assertTrue(loginPage.isLoginButtonDisabled(), "Кнопка 'Log In' должна быть недоступной после ввода email");
     }
 
     @Test
     public void testIsLoginButtonDisabledAfterPasswordInput() {
         loginPage.clickPasswordField()
-                .inputRandomPassword(createRandomPassword());
+                .inputRandomPassword(DataGenerator.createRandomPassword());
         Assertions.assertTrue(loginPage.isLoginButtonDisabled(), "Кнопка 'Log In' должна быть недоступной после ввода пароля");
     }
 
