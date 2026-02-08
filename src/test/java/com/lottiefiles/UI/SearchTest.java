@@ -22,7 +22,7 @@ public class SearchTest {
 
     @Test
     public void searchTest() {
-        String searchText = DataGenerator.generateRandomWord();
+        String searchText = "cat";
         searchPage.clickForSearchField();
         searchPage.inputSearchTextAndPressEnter(searchText);
 
@@ -36,7 +36,7 @@ public class SearchTest {
 
     @Test
     public void searchWithUrlTest() {
-        String searchWord = DataGenerator.generateRandomWord();
+        String searchWord = "dog";
         searchPage.startSearching(searchWord);
 
         Assertions.assertEquals(searchPage.getExpectedSearchResaltText(searchWord), searchPage.getSearchResultTitle());
