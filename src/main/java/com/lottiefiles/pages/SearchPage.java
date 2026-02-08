@@ -1,6 +1,8 @@
 package com.lottiefiles.pages;
 
-import com.lottiefiles.driver.*;
+import com.lottiefiles.driver.Driver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class SearchPage {
     private final String SEARCH_PAGE_URL = "https://lottiefiles.com/free-animations/";
@@ -11,12 +13,17 @@ public class SearchPage {
     private final String MORE_SEARCH_BANNER = "//h2[@class=\"mb-4 md:mb-6 heading4 text-center md:heading3 capitalize\"]";
     private final String PACKS_SEARCH_BANNER = "//h2[@class=\"mb-4 md:mb-6 heading3 capitalize\"]";
 
+    private static final Logger logger = LogManager.getLogger();
+
     public void clickForSearchField() {
+        logger.info("Кликаем по полю поиска");
         Driver.click(SEATCH_FIELD);
     }
 
     public void inputSearchTextAndPressEnter(String searchText) {
+        logger.info("Вводим текст поиска: '{}'", searchText);
         Driver.waitAndInput(SEARCH_INPUT_FIELD, searchText);
+        logger.info("Нажимаем Enter для поиска");
         Driver.PressEnter(SEARCH_INPUT_FIELD);
     }
 
@@ -41,7 +48,9 @@ public class SearchPage {
     }
 
     public void startSearching(String searchParam) {
-        Driver.goToPage(SEARCH_PAGE_URL + searchParam);
+        String url = SEARCH_PAGE_URL + searchParam;
+        logger.info("Переход на страницу поиска по URL: {}", url);
+        Driver.goToPage(url);
     }
 
     public String getSearchResultTitle() {
@@ -59,6 +68,4 @@ public class SearchPage {
     public String getPacksSearchBannerText(){
         return Driver.getText(PACKS_SEARCH_BANNER);
     }
-
-
 }

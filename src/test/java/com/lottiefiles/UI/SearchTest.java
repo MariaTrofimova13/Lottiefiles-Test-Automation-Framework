@@ -1,15 +1,21 @@
 package com.lottiefiles.UI;
 
-import com.lottiefiles.dataGenerator.*;
-import com.lottiefiles.driver.*;
-import com.lottiefiles.pages.*;
-import org.junit.jupiter.api.*;
+import com.lottiefiles.driver.Driver;
+import com.lottiefiles.pages.HomePage;
+import com.lottiefiles.pages.SearchPage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SearchTest {
     private HomePage homePage;
     private SearchPage searchPage;
+    private static final Logger logger = LogManager.getLogger();
 
     @BeforeEach
     public void openHomePageAndCloseCookies() {

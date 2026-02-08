@@ -1,6 +1,6 @@
 package com.lottiefiles.dataGenerator;
 
-import com.github.javafaker.*;
+import com.github.javafaker.Faker;
 
 public class DataGenerator {
     private static final Faker faker = new Faker();
