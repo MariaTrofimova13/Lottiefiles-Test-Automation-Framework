@@ -81,8 +81,9 @@ public class LoginPage {
     }
 
     public boolean isLoginButtonDisabled() {
-        boolean isDisplayed = Driver.getDriver().findElement(By.xpath(VISIBLE_BUTTON_LOGIN)).isDisplayed();
-        logger.info("Статус отображения кнопки входа: {}", isDisplayed ? "доступна" : "неактивна");
+        boolean isDisplayed = Driver.isElementDisplayed(VISIBLE_BUTTON_LOGIN);
+        //boolean isDisplayed = Driver.getDriver().findElement(By.xpath(VISIBLE_BUTTON_LOGIN)).isDisplayed();
+        logger.info("Статус отображения кнопки входа: {}", isDisplayed ? "неактивна" : "доступна");
         return isDisplayed;
     }
 }

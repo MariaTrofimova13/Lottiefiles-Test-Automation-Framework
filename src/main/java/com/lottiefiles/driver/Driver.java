@@ -104,4 +104,9 @@ public class Driver {
     public static void goToPage(String url) {
         driver.get(url);
     }
+
+    public static boolean isElementDisplayed(String xpath){
+        driver.findElement(By.xpath(xpath)).isDisplayed();
+        return true;
+    }
 }
