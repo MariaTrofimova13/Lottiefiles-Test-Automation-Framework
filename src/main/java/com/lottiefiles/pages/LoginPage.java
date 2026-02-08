@@ -3,7 +3,6 @@ package com.lottiefiles.pages;
 import com.lottiefiles.driver.Driver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
 
 public class LoginPage {
     private final String IFRAME = "auth-client-iframe";
@@ -82,7 +81,6 @@ public class LoginPage {
 
     public boolean isLoginButtonDisabled() {
         boolean isDisplayed = Driver.isElementDisplayed(VISIBLE_BUTTON_LOGIN);
-        //boolean isDisplayed = Driver.getDriver().findElement(By.xpath(VISIBLE_BUTTON_LOGIN)).isDisplayed();
         logger.info("Статус отображения кнопки входа: {}", isDisplayed ? "неактивна" : "доступна");
         return isDisplayed;
     }

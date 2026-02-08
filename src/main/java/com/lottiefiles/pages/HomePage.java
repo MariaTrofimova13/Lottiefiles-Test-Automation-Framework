@@ -42,7 +42,7 @@ public class HomePage {
     }
 
     public HomePage closeCookies() {
-        Driver.click(BUTON_COOKIE_CLOSE);
+        Driver.waitAndClick(BUTON_COOKIE_CLOSE);
         logger.info("Приняли cookie");
         return this;
     }
