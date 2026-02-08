@@ -1,6 +1,8 @@
 package com.lottiefiles.pages;
 
 import com.lottiefiles.driver.Driver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 public class HomePage {
@@ -27,52 +29,63 @@ public class HomePage {
 
     private WebDriver driver;
 
+    private static final Logger logger = LogManager.getLogger();
+
     public HomePage() {
         this.driver = Driver.getDriver();
     }
 
     public HomePage open() {
         driver.get(BASE_URL);
+        logger.info("Открылась домашняя страница");
         return this;
     }
 
     public HomePage closeCookies() {
         Driver.click(BUTON_COOKIE_CLOSE);
+        logger.info("Приняли cookie");
         return this;
     }
 
     public String getFooterText() {
-        return Driver.getText(FOOTER);
+        String footerText = Driver.getText(FOOTER);
+        logger.info("Текст внизу страницы соответствует " + footerText);
+        return footerText;
     }
 
-    public String getButtonProductsText(){
-        return Driver.getText(BUTTON_PRODUCTS);
+    private String logAndGetButtonText(String buttonLocator, String buttonName) {
+        String text = Driver.getText(buttonLocator);
+        logger.info("Текст кнопки '{}' на главной странице: '{}'", buttonName, text);
+        return text;
     }
 
-    public String getButtonIntegrationsText(){
-        return Driver.getText(BUTTON_INTEGRATIONS);
+    public String getButtonProductsText() {
+        return logAndGetButtonText(BUTTON_PRODUCTS, "Products");
     }
 
-    public String getButtonToolsText(){
-        return Driver.getText(BUTTON_TOOLS);
+    public String getButtonIntegrationsText() {
+        return logAndGetButtonText(BUTTON_INTEGRATIONS, "Integrations");
     }
 
-    public String getButtonCustomersText(){
-        return Driver.getText(BUTTON_CUSTOMERS);
+    public String getButtonToolsText() {
+        return logAndGetButtonText(BUTTON_TOOLS, "Tools");
     }
 
-    public String getButtonLearnText(){
-        return Driver.getText(BUTTON_LEARN);
+    public String getButtonCustomersText() {
+        return logAndGetButtonText(BUTTON_CUSTOMERS, "Customers");
     }
 
-    public String getButtonPricingText(){
-        return Driver.getText(BUTTON_PRICING);
+    public String getButtonLearnText() {
+        return logAndGetButtonText(BUTTON_LEARN, "Learn");
+    }
+
+    public String getButtonPricingText() {
+        return logAndGetButtonText(BUTTON_PRICING, "Pricing");
     }
 
     public LoginPage clickLoginButton() {
         Driver.click(BUTTON_LOGIN);
+        logger.info("Нажата кнопка Login");
         return new LoginPage();
     }
-
-
 }

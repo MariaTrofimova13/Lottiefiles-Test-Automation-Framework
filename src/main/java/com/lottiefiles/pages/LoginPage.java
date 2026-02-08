@@ -1,6 +1,8 @@
 package com.lottiefiles.pages;
 
 import com.lottiefiles.driver.Driver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 
 public class LoginPage {
@@ -22,50 +24,65 @@ public class LoginPage {
     private final String INVALID_LOGIN_ERROR = "//p[@class=\"text-sm\"]";
     private final String MESSAGE_AFTER_SUCCESSFUL_LOGIN = "//h1[@class=\"w-full text-lg font-bold leading-8 text-gray-900 mb-1 text-center\"]";
 
+    private static final Logger logger = LogManager.getLogger();
 
-    public String getLoginTitle() {
-        return Driver.waitAndGetText(LOGIN_TITLE);
+    public String getLoginTitleText() {
+        String loginTitleText = Driver.waitAndGetText(LOGIN_TITLE);
+        logger.info("Получен заголовок при входе" + loginTitleText);
+        return loginTitleText;
     }
 
     public LoginPage clickLoginButtonWithEmail() {
         Driver.switchToFrameAndWaitAndClick(IFRAME, BUTTON_LOGIN_WITH_EMAIL);
+        logger.info("Клик по кнопке входа с иконкой конверта");
         return this;
     }
 
     public LoginPage clickEmailField() {
+        logger.info("Клик по полю email");
         Driver.waitAndClick(EMAIL_FIELD);
         return this;
     }
 
     public LoginPage clickPasswordField() {
+        logger.info("Клик по полю пароль");
         Driver.waitAndClick(PASSWORD_FIELD);
         return this;
     }
 
     public LoginPage inputRandomEmail(String email) {
+        logger.info("Ввод email: {}", email);
         Driver.waitAndInput(EMAIL_INPUT, email);
         return this;
     }
 
     public LoginPage inputRandomPassword(String password) {
+        logger.info("Ввод пароля");
         Driver.waitAndInput(PASSWORD_INPUT, password);
         return this;
     }
 
     public LoginPage clickVisibleButtonLogin() {
+        logger.info("Клик по кнопке входа");
         Driver.waitAndClick(VISIBLE_BUTTON_LOGIN);
         return this;
     }
 
     public String getMessageAfterLogin() {
-        return Driver.waitAndGetText(MESSAGE_AFTER_SUCCESSFUL_LOGIN);
+        String message = Driver.waitAndGetText(MESSAGE_AFTER_SUCCESSFUL_LOGIN);
+        logger.info("Сообщение после входа: {}", message);
+        return message;
     }
 
     public String getLoginErrorMessage() {
-        return Driver.waitAndGetText(INVALID_LOGIN_ERROR);
+        String errorMessage = Driver.waitAndGetText(INVALID_LOGIN_ERROR);
+        logger.info("Сообщение об ошибке входа: {}", errorMessage);
+        return errorMessage;
     }
 
     public boolean isLoginButtonDisabled() {
-        return Driver.getDriver().findElement(By.xpath(VISIBLE_BUTTON_LOGIN)).isDisplayed();
+        boolean isDisplayed = Driver.getDriver().findElement(By.xpath(VISIBLE_BUTTON_LOGIN)).isDisplayed();
+        logger.info("Статус отображения кнопки входа: {}", isDisplayed ? "доступна" : "неактивна");
+        return isDisplayed;
     }
 }
