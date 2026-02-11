@@ -1,5 +1,6 @@
 package com.lottiefiles.api;
 
+import com.lottiefiles.dataBase.DataBase;
 import com.lottiefiles.dataGenerator.*;
 import io.restassured.response.Response;
 import org.apache.logging.log4j.LogManager;
@@ -52,6 +53,11 @@ public class UserAuthService {
                         .body(getBody(email, password))
                         .when()
                         .post(urlUserGraphql);
+    }
+
+    public void doRequestRealUser() {
+        logger.info("Выполнение запроса аутентификации с валидными данными");
+        doRequest(DataBase.getEmailUserFromDataBase(), DataBase.getPasswordUserFromDataBase());
     }
 
     public void printResponse() {

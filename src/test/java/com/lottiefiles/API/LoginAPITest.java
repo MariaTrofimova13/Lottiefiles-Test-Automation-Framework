@@ -43,8 +43,7 @@ public class LoginAPITest {
 
     @Test
     public void validLoginText(){
-        userAuthService.doRequest("maria.tarasowa@tut.by", "Test132435test");
-        userAuthService.printResponse();
+        userAuthService.doRequestRealUser();
 
         assertAll(
                 () -> Assertions.assertEquals(200, userAuthService.getStatusCode())
