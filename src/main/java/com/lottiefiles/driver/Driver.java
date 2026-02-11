@@ -15,6 +15,7 @@ import java.time.Duration;
 public class Driver {
     private static WebDriver driver;
     private static WebDriverWait wait;
+    static int DEFAULT_WAIT_TIME_SECONDS = 10;
     private static final Logger logger = LogManager.getLogger();
 
     private Driver() {
@@ -26,7 +27,7 @@ public class Driver {
             driver = new ChromeDriver();
             driver.manage().window().maximize();
         }
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_WAIT_TIME_SECONDS));
         logger.info("Создан хром драйвер");
         return driver;
     }

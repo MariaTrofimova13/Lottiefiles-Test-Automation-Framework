@@ -18,7 +18,7 @@ public class SearchFreeAnimationsTest {
 
         assertAll("searchService",
                 () -> assertEquals(200, searchService.getStatusCode()),
-                () -> assertTrue(searchService.getBody().contains(searchService.getExpectedText(searchQuery)), "Текст не соответствует фразе Free поисковое слово Animations")
+                () -> assertTrue(searchService.getBody().contains(searchService.getExpectedText(searchQuery)), "Текст не соответствует фразе: Free" + searchQuery + " Animations")
         );
     }
 }
