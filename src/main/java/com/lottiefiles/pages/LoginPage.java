@@ -1,5 +1,6 @@
 package com.lottiefiles.pages;
 
+import com.lottiefiles.dataBase.DataBase;
 import com.lottiefiles.driver.Driver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,8 +11,6 @@ public class LoginPage {
     public final String LOGIN_TITLE_TEXT = "Log in";
     public final String INVALID_LOGIN_ERROR_TEXT = "Incorrect email or password. Please enter them again.";
     public final String MESSAGE_AFTER_SUCCESSFUL_LOGIN_TEXT = "Join your team's workspace or create a new one";
-    public final String REAL_EMAIL = "maria.tarasowa@tut.by";
-    public final String REAL_PASSWORD = "Test132435test";
 
     private final String BUTTON_LOGIN_WITH_EMAIL = "//button[@id=\"button-password-login\"]/div[@class=\"flex justify-center items-center w-icon-lg h-icon-lg *:w-icon-lg *:h-icon-lg\"]";
     private final String LOGIN_TITLE = "//h2[@class=\"font-bold text-2xl\"]";
@@ -55,9 +54,22 @@ public class LoginPage {
         return this;
     }
 
+    public LoginPage inputRealEmail() {
+        String email = DataBase.getEmailUserFromDataBase();
+        logger.info("Ввод email из базы данных: {}", email);
+        Driver.waitAndInput(EMAIL_INPUT, email);
+        return this;
+    }
+
     public LoginPage inputRandomPassword(String password) {
         logger.info("Ввод пароля");
         Driver.waitAndInput(PASSWORD_INPUT, password);
+        return this;
+    }
+
+    public LoginPage inputRealPassword() {
+        logger.info("Ввод пароля");
+        Driver.waitAndInput(PASSWORD_INPUT, DataBase.getPasswordUserFromDataBase());
         return this;
     }
 

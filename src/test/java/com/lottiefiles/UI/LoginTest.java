@@ -35,8 +35,9 @@ public class LoginTest {
     public void PositiveTestLogin() {
         logger.info("Тест: успешный вход с валидными данными");
         loginPage.clickEmailField()
-                .inputRandomEmail(loginPage.REAL_EMAIL)
-                .clickPasswordField().inputRandomPassword(loginPage.REAL_PASSWORD)
+                .inputRealEmail()
+                .clickPasswordField()
+                .inputRealPassword()
                 .clickVisibleButtonLogin();
         Driver.switchToDefaultContent();
         Assertions.assertEquals(loginPage.MESSAGE_AFTER_SUCCESSFUL_LOGIN_TEXT, loginPage.getMessageAfterLogin());
